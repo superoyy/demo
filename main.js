@@ -10,9 +10,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     //width: 1024, 
     //height: 768
-    // webPreferences: {
-    //   webSecurity: false
-    // }    
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true
+    }
   });
 
   mainWindow.webContents.openDevTools({
@@ -20,7 +21,7 @@ function createWindow () {
   });
   
   mainWindow.loadFile('./render/index.html');
- //mainWindow.maximize();
+  mainWindow.maximize();
  
 
   // Emitted when the window is closed.

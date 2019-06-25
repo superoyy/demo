@@ -1,9 +1,10 @@
 // Modules to control application life and create native browser window
-const {app,BrowserWindow,ipcMain} = require('electron');
-const ejs = require('ejs');
+const {app,BrowserWindow} = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+require('./controller/main-controller');
 
 function createWindow () {
   // Create the browser window.
@@ -56,59 +57,3 @@ app.on('activate', function () {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
-//监听与渲染进程的通信
-ipcMain.on('main-controller', (event, arg) => {
-  switch(arg){
-    case 'exit':
-      app.quit();//退出程序
-      break;
-    case 'm_header':
-      ejs.renderFile('./render/view/header.ejs',{},function(err,data){
-        if(err){
-          console.debug(err);
-        }else{
-          event.returnValue = data;
-        }
-      });
-      break;
-    case 'm_content':
-      ejs.renderFile('./render/view/content.ejs',{},function(err,data){
-        if(err){
-          console.debug(err);
-        }else{
-          event.returnValue = data;
-        }
-      });
-      break;
-    case 'm_aside_left':
-      ejs.renderFile('./render/view/left-aside.ejs',{},function(err,data){
-        if(err){
-          console.debug(err);
-        }else{
-          event.returnValue = data;
-        }
-      });
-      break;            
-    case 'm_footer':
-      ejs.renderFile('./render/view/footer.ejs',{},function(err,data){
-        if(err){
-          console.debug(err);
-        }else{
-          event.returnValue = data;
-        }
-      });
-      break;            
-    case 'm_quick_sidebar':
-      ejs.renderFile('./render/view/quick-sidebar.ejs',{},function(err,data){
-        if(err){
-          console.debug(err);
-        }else{
-          event.returnValue = data;
-        }
-      });
-      break;            
-    }
-});

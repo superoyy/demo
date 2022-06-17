@@ -8,7 +8,7 @@
   },
   "author": "dukla.ou",
   "devDependencies": {
-    "electron": "^5.0.5"
+    "electron": "^15.5.5"
   },
   "license": "ISC",
   "dependencies": {
